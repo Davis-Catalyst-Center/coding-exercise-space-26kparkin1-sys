@@ -2,7 +2,7 @@
 using namespace std;
 int main () {
     char grade;
-    cout << "What grade did you receive in your under-water basket weaving? " << std::endl;
+    cout <<  "What grade did you receive in your under-water basket weaving? " << std::endl;
     cin >> grade;
 
     switch(std::tolower(grade)) {
