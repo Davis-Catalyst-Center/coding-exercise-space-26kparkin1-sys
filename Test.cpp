@@ -3,11 +3,8 @@
 
 int main()
 {
-    int x;
-    std::cout << "Enter a number: ";
-    std::cin >> x;
-    if (x > 10)
-        std::cout << "Wow, that's a big number!" << std::endl; 
-  
-    return 0; 
+    float num = 3.14;
+    int x = num;
+
+    return 0;
 }
