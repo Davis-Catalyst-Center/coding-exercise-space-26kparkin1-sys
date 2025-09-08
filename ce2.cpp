@@ -24,27 +24,25 @@ int main() {
         cout << "That’s not a valid letter grade... bruh." << endl;
     }
 
-    cout << "\nNow let’s check the switch version:" << endl;
-
     // switch statement with the same cases
     switch (grade) {
         case 'a':
-            cout << "Switch: Excellent work — your basket is watertight!" << endl;
+            cout << "Excellent work — your basket is watertight!" << endl;
             break;
         case 'b':
-            cout << "Switch: Good effort, sturdy basket." << endl;
+            cout << "Good effort, sturdy basket." << endl;
             break;
         case 'c':
-            cout << "Switch: Average, basket needs improvement." << endl;
+            cout << "Average, basket needs improvement." << endl;
             break;
         case 'd':
-            cout << "Switch: Weak basket, almost failed." << endl;
+            cout << 'Weak basket, almost failed." << endl;
             break;
         case 'f':
-            cout << "Switch: Failed — your basket fell apart." << endl;
+            cout << "Failed — your basket fell apart." << endl;
             break;
         default:
-            cout << "Switch: Invalid grade input." << endl;
+            cout << "Invalid grade input." << endl;
             break;
     }
 
