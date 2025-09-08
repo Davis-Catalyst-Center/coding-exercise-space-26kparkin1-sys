@@ -26,7 +26,7 @@ bool isPrime(int number) {
     }
     for (int i = 2; i <= std::sqrt(number); ++i) {
         if (number % i == 0) {
-            returssn false;
+            return false;
         }
     }
     return true;
