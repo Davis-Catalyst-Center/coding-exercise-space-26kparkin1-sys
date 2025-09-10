@@ -1,93 +1,76 @@
 #include <iostream>
-#include <random>
-#include <chrono>
-#include <limits>
-#include <cmath>
+#include <cstdlib>
+#include <ctime>
+using namespace std;
 
 int main() {
-    unsigned seed = std::chrono::high_resolution_clock::now().time_since_epoch().count();
-    std::mt19937 generator(seed);
-    std::uniform_int_distribution<int> op_distribution(1, 5);
-    std::uniform_int_distribution<int> num_distribution(1, 100);
+    srand(time(0));  // seed the random number generator
 
-    int total_problems;
+    int total_problems = 0;
     int correct_answers = 0;
 
-    std::cout << "Welcome to the Arithmetic Quiz!" << std::endl;
-    std::cout << "Enter the number of problems you want to solve: ";
+    cout << "Welcome to the arithmetic quiz!" << endl;
+    cout << "Enter the number of problems you want to solve: ";
 
-    while (!(std::cin >> total_problems) || total_problems <= 0) {
-        std::cout << "Invalid input. Please enter a positive integer for the number of problems: ";
-        std::cin.clear();
-        std::cin.ignore(std::numeric_limits<std::streamsize>::max(), '\n');
+    while (!(cin >> total_problems) || total_problems <= 0) {
+        cout << "Invalid input. Please enter a positive integer: ";
+        cin.clear();
+        cin.ignore(1000, '\n');
     }
 
-    for (int i = 0; i < total_problems; ++i) {
-        int operation = op_distribution(generator);
-        double num1 = num_distribution(generator);
-        double num2 = num_distribution(generator);
-        double correct_answer = 0.0;
-        char op_symbol = ' ';
+    for (int i = 1; i <= total_problems; i++) {
+        int num1 = rand() % 10 + 1; // 1–10
+        int num2 = rand() % 10 + 1; // 1–10
+        int operation = rand() % 4; // 0=+,1=-,2=*,3=/
+        int correct_answer;
+        char op_symbol;
 
-        if (operation == 4) { // Division
-            while (num2 == 0) {
-                num2 = num_distribution(generator);
-            }
-        } else if (operation == 5) { // Modulus
-            while (num2 == 0 || num1 <= num2) {
-                num1 = num_distribution(generator);
-                num2 = num_distribution(generator);
+        // Fix division so it divides cleanly
+        if (operation == 3) {
+            while (num2 == 0 || num1 % num2 != 0) {
+                num1 = rand() % 10 + 1;
+                num2 = rand() % 10 + 1;
             }
         }
 
         switch (operation) {
-            case 1:
+            case 0:
                 correct_answer = num1 + num2;
                 op_symbol = '+';
                 break;
-            case 2:
+            case 1:
                 correct_answer = num1 - num2;
                 op_symbol = '-';
                 break;
-            case 3:
+            case 2:
                 correct_answer = num1 * num2;
                 op_symbol = '*';
                 break;
-            case 4:
+            case 3:
                 correct_answer = num1 / num2;
                 op_symbol = '/';
                 break;
         }
 
-        std::cout << "\nProblem #" << i + 1 << ": What is " << num1 << " " << op_symbol << " " << num2 << "? ";
+        cout << "Problem " << i << ": What is " << num1 << " " << op_symbol << " " << num2 << "? ";
 
-        double user_answer;
-
-        while (!(std::cin >> user_answer)) {
-            std::cout << "Invalid input. Please enter a numerical answer: ";
-            std::cin.clear();
-            std::cin.ignore(std::numeric_limits<std::streamsize>::max(), '\n');
+        int user_answer;
+        while (!(cin >> user_answer)) {
+            cout << "Invalid input. Please enter a number: ";
+            cin.clear();
+            cin.ignore(1000, '\n');
         }
 
-        if (operation == 4) {
-             if (std::abs(user_answer - correct_answer) < 0.0001) {
-                std::cout << "Correct!" << std::endl;
-                correct_answers++;
-            } else {
-                std::cout << "Incorrect. The correct answer was " << correct_answer << "." << std::endl;
-            }
+        if (user_answer == correct_answer) {
+            cout << "Correct!" << endl;
+            correct_answers++;
         } else {
-            if (user_answer == correct_answer) {
-                 std::cout << "Correct!" << std::endl;
-                correct_answers++;
-            } else {
-                std::cout << "Incorrect. The correct answer was " << correct_answer << "." << std::endl;
-            }
+            cout << "Incorrect. The correct answer was " << correct_answer << endl;
         }
     }
 
-    std::cout << "\nQuiz finished!" << std::endl;
-    std::cout << "Your score: " << correct_answers << "/" << total_problems << std::endl;
+    cout << "\nQuiz finished!" << endl;
+    cout << "Your score: " << correct_answers << " / " << total_problems << endl;
 
     return 0;
 }
