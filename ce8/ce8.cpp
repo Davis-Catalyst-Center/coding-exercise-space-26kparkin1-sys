@@ -17,7 +17,21 @@ int main() {
     cout << w2.displayInfo() << endl;
 
     w2.recharge();
+    cout << w3.displayInfo() << endl;
+
+        w3.castSpell(w2, 30);
+    cout << w4.displayInfo() << endl;
+
+    w4.recharge();
+    cout << w1.displayInfo() << endl;
+
+        w1.castSpell(w2, 30);
+    cout << w3.displayInfo() << endl;
+
+    w4.recharge();
     cout << w2.displayInfo() << endl;
+
+
 
     return 0;
 }
